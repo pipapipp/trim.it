@@ -1,40 +1,63 @@
-import * as React from "react"
-import { cn } from "@/lib/utils"
+'use client'
 
-export interface ButtonProps
-    extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: "default" | "secondary" | "outline"
-    size?: "default" | "sm" | "lg" | "icon"
+import { motion } from 'framer-motion'
+import { Loader2 } from 'lucide-react'
+import { ReactNode } from 'react'
+import clsx from 'clsx'
+
+interface ButtonProps {
+    children: ReactNode
+    onClick?: () => void
+    loading?: boolean
+    className?: string
+    disabled?: boolean
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant = "default", size = "default", ...props }, ref) => {
-        const base =
-            "inline-flex items-center justify-center rounded-xl font-medium transition-all focus:outline-none disabled:opacity-50 disabled:pointer-events-none"
+export default function Button({
+    children,
+    onClick,
+    loading = false,
+    className,
+    disabled = false,
+}: ButtonProps) {
+    return (
+        <motion.button
+            whileHover={{
+                scale: 1.05,
+                boxShadow: '0px 0px 25px rgba(59,130,246,0.6)',
+            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 100 }}
+            onClick={onClick}
+            disabled={disabled || loading}
+            className={clsx(
+                `
+        relative
+        overflow-hidden
+        px-6 py-3
+        rounded-xl
+        font-semibold
+        text-white
+        bg-gradient-to-r
+        from-blue-500
+        to-purple-500
+        transition-all
+        duration-300
+        disabled:opacity-50
+        disabled:cursor-not-allowed
+        `,
+                className
+            )}
+        >
+            {/* Shimmer Effect */}
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-400" />
 
-        const variants = {
-            default: "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md",
-            secondary:
-                "bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-800 dark:text-white",
-            outline:
-                "border border-gray-300 hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800",
-        }
-
-        const sizes = {
-            default: "h-10 px-4",
-            sm: "h-8 px-3 text-sm",
-            lg: "h-12 px-6 text-lg",
-            icon: "h-10 w-10 p-0",
-        }
-
-        return (
-            <button
-                ref={ref}
-                className={cn(base, variants[variant], sizes[size], className)}
-                {...props}
-            />
-        )
-    }
-)
-
-Button.displayName = "Button"
+            <span className="relative flex items-center justify-center gap-2">
+                {loading && (
+                    <Loader2 className="animate-spin" size={18} />
+                )}
+                {children}
+            </span>
+        </motion.button>
+    )
+}

@@ -1,12 +1,9 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
-import { Toaster } from 'sonner'
+import type { Metadata } from 'next'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata = {
-  title: 'Modern URL Shortener',
-  description: 'Premium aesthetic URL shortener',
+export const metadata: Metadata = {
+  title: 'trim.it',
+  description: 'Smart URL Shortener'
 }
 
 export default function RootLayout({
@@ -16,10 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {children}
-        <Toaster richColors position="top-center" />
-      </body>
+      <body>{children}</body>
     </html>
   )
 }
