@@ -29,13 +29,21 @@ trim.it adalah sebuah web app yang memungkinkan pengguna untuk mempersingkat lin
 ##  Project Structure
 
 app/
+
 components/
-├─ effects/
+  
+  ├─ effects/
+
 ├─ hero/
+  
 ├─ layout/
+  
 ├─ links/
+  
 ├─ ui/
+  
 lib/
+
 store/
 
 ---
