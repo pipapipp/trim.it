@@ -9,8 +9,7 @@ export default function HeroSection() {
             <motion.h1
                 initial={{ opacity: 0, y: -40 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text"
-            >
+                className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight px-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                 Trim Your Long Links Instantly
             </motion.h1>
 
