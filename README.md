@@ -10,7 +10,7 @@ trim.it adalah sebuah web app yang memungkinkan pengguna untuk mempersingkat lin
 ## Features
 
 -  URL Shortener
--  Custom Slug (contoh: trim.it/portofolio)
+-  Custom Slug (ex: trim.it/portofolio)
 -  QR Code Generator
 -  Recent Links Section
 
@@ -26,27 +26,6 @@ trim.it adalah sebuah web app yang memungkinkan pengguna untuk mempersingkat lin
 
 ---
 
-##  Project Structure
-
-app/
-
-components/
-  
-  ├─ effects/
-
-├─ hero/
-  
-├─ layout/
-  
-├─ links/
-  
-├─ ui/
-  
-lib/
-
-store/
-
----
 
 ##  License
 
