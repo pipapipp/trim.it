@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
 import { useState } from "react"
+import { supabase } from "../../lib/supabase"
 
 export default function LoginModal({
     isOpen,
@@ -14,6 +15,32 @@ export default function LoginModal({
     const [mode, setMode] = useState<"login" | "signup">("login")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const handleSignup = async () => {
+        const { error } = await supabase.auth.signUp({
+            email,
+            password,
+        })
+
+        if (error) {
+            alert(error.message)
+        } else {
+            alert("Signup successful!")
+        }
+    }
+
+    const handleLogin = async () => {
+        const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        })
+
+        if (error) {
+            alert(error.message)
+        } else {
+            alert("Login successful!")
+            onClose()
+        }
+    }
 
     return (
         <AnimatePresence>
@@ -83,6 +110,7 @@ export default function LoginModal({
 
                             {/* Button */}
                             <button
+                                onClick={mode === "login" ? handleLogin : handleSignup}
                                 className="w-full mt-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:opacity-90 transition"
                             >
                                 {mode === "login" ? "Login" : "Create Account"}
