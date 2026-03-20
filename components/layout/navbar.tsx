@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import LoginModal from "../auth/login-modal"
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false)
+    const [openLogin, setOpenLogin] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -17,6 +19,7 @@ export default function Navbar() {
     }, [])
 
     return (
+        <>
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300
         ${scrolled
                 ? "bg-neutral-900/70 backdrop-blur-md border-b border-white/10"
@@ -45,7 +48,9 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <button className="text-sm px-3 py-2 rounded-lg text-neutral-300 hover:text-white hover:bg-white/10 transition">
+                    <button 
+                        onClick={() => setOpenLogin(true)}
+                        className="text-sm px-3 py-2 rounded-lg text-neutral-300 hover:text-white hover:bg-white/10 transition">
                         Login
                     </button>
                     <button className="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:opacity-90 transition">
@@ -55,5 +60,7 @@ export default function Navbar() {
 
             </div>
         </nav>
+        <LoginModal isOpen={openLogin} onClose={() => setOpenLogin(false)} />   
+        </>
     )
 }
