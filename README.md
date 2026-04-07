@@ -16,11 +16,11 @@ trim.it is a web app that allows users to shorten long links into more concise a
 
 ##  Tech Stack
 
-- Next.js (App Router)
+- Next.js
 - TypeScript
 - Tailwind CSS
 - Framer Motion
-- Zustand (State Management)
+- Zustand
 
 ---
 
